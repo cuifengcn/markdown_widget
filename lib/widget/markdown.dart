@@ -25,6 +25,8 @@ class MarkdownWidget extends StatefulWidget {
   ///make text selectable
   final bool selectable;
 
+  final SelectableRegionContextMenuBuilder? contextMenuBuilder;
+
   ///the configs of markdown
   final MarkdownConfig? config;
 
@@ -38,6 +40,7 @@ class MarkdownWidget extends StatefulWidget {
     this.physics,
     this.shrinkWrap = false,
     this.selectable = true,
+    this.contextMenuBuilder,
     this.padding,
     this.config,
     this.markdownGenerator,
@@ -126,7 +129,10 @@ class MarkdownWidgetState extends State<MarkdownWidget> {
       ),
     );
     return widget.selectable
-        ? SelectionArea(child: markdownWidget)
+        ? SelectionArea(
+            child: markdownWidget,
+            contextMenuBuilder: widget.contextMenuBuilder,
+          )
         : markdownWidget;
   }
 
